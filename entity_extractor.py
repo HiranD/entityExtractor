@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from spacy.en import English
+import spacy
 import json
 import logging
 import traceback
@@ -22,18 +22,18 @@ fh.setFormatter(formatter)
 logger.addHandler(ch)
 logger.addHandler(fh)
 
-parser = English()
+nlp = spacy.load("en")
 
 
 def sentences(doc):
-    parsed_data = parser(doc)
+    parsed_data = nlp(doc)
     for span in parsed_data.sents:
         sent = ''.join(parsed_data[i].string for i in range(span.start, span.end)).strip()
         yield sent
 
 
 def names_ex(sentence):
-    parsed_ex= parser(sentence)
+    parsed_ex = nlp(sentence)
     ents = list(parsed_ex.ents)
     dic = OrderedDict()
     for entity in ents:
