@@ -7,6 +7,12 @@ import logging
 application = Flask(__name__)
 
 
+# to check service is up..
+# url: get request => http://ip:port/
+
+# url: post request => http://ip:port/
+# include text content as raw data in the request body
+# or url: get request => http://ip:port/?concept='text content'
 @application.route('/', methods=['GET', 'POST'])
 def index():
     try:

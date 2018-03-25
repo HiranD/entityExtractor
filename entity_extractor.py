@@ -25,6 +25,7 @@ logger.addHandler(fh)
 nlp = spacy.load("en")
 
 
+# sentence tokenizer
 def sentences(doc):
     parsed_data = nlp(doc)
     for span in parsed_data.sents:
@@ -45,6 +46,7 @@ def names_ex(sentence):
 def get_names(sent):
     logger.info(sent)
     response = []
+    # select categories you want..
     selected_entities = ["PERSON", "NORP", "FACILITY", "ORGANIZATION", "LOCATION",
                          "GPE", "PRODUCT", "EVENT", "WORK_OF_ART", "LANGUAGE"]
 
@@ -70,6 +72,7 @@ def get_names(sent):
                 "CARDINAL": [],
             }
             nam = names_ex(sentence)
+            # rename shortened categories to their real name
             for key, value in nam.items():
                 if value == "LOC":
                     value = "LOCATION"
